@@ -1,50 +1,29 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
+import logoSrc from "./resources/Icon.png";
+import supabase from "./lib/supabase";
 
 /* ───────── COLORS ───────── */
 const C = {
-  indigo: "#2D1B69",
-  indigoMid: "#3B2580",
-  purple: "#6C3FC5",
-  teal: "#0CCCAA",
-  tealLight: "#14F0C6",
-  tealDim: "#0A9E85",
-  dark: "#08080F",
-  card: "#0F0F20",
-  cardHover: "#161632",
-  text: "#E8E6F0",
-  dim: "#9B97B0",
+  blue: "#1B90E8",
+  blueDark: "#1060C0",
+  blueLight: "#4AAFF5",
+  yellow: "#FFB300",
+  yellowLight: "#FFC940",
+  yellowDim: "#E09A00",
+  dark: "#080D14",
+  card: "#0E1828",
+  cardHover: "#132030",
+  text: "#E8EEF5",
+  dim: "#8A9AB5",
   white: "#FFFFFF",
 };
 
-/* ───────── LOGO SVG ───────── */
+/* ───────── LOGO ───────── */
 const Logo = ({ size = 36 }) => (
-  <svg width={size} height={size} viewBox="0 0 40 40" fill="none">
-    <rect width="40" height="40" rx="10" fill="url(#ubLogo)" />
-    <path
-      d="M12 20.5C12 20.5 16 14 20 14C24 14 28 20.5 28 20.5C28 20.5 24 27 20 27C16 27 12 20.5 12 20.5Z"
-      stroke="#fff"
-      strokeWidth="1.8"
-      fill="none"
-    />
-    <circle cx="20" cy="20.5" r="3" fill="#fff" opacity="0.9" />
-    <line
-      x1="10"
-      y1="16"
-      x2="30"
-      y2="25"
-      stroke="#fff"
-      strokeWidth="2.5"
-      strokeLinecap="round"
-    />
-    <defs>
-      <linearGradient id="ubLogo" x1="0" y1="0" x2="40" y2="40">
-        <stop offset="0%" stopColor={C.indigoMid} />
-        <stop offset="100%" stopColor={C.tealDim} />
-      </linearGradient>
-    </defs>
-  </svg>
+  <Image src={logoSrc} alt="UniBlind" width={size} height={size} style={{ borderRadius: 8 }} />
 );
 
 /* ───────── FADE-IN ON SCROLL ───────── */
@@ -90,7 +69,7 @@ const s = {
     fontWeight: 700,
     letterSpacing: 3,
     textTransform: "uppercase",
-    color: C.teal,
+    color: C.yellow,
     marginBottom: 12,
   },
   h2: {
@@ -109,7 +88,7 @@ const s = {
     marginTop: 14,
   },
   btnPrimary: {
-    background: `linear-gradient(135deg, ${C.purple}, ${C.tealDim})`,
+    background: `linear-gradient(135deg, ${C.blueDark}, ${C.blue})`,
     color: "#fff",
     border: "none",
     padding: "13px 28px",
@@ -143,9 +122,9 @@ function Nav() {
         justifyContent: "space-between",
         alignItems: "center",
         backdropFilter: "blur(20px)",
-        background: scrolled ? "rgba(8,8,15,0.85)" : "transparent",
+        background: scrolled ? "rgba(8,13,20,0.85)" : "transparent",
         borderBottom: scrolled
-          ? "1px solid rgba(108,63,197,0.1)"
+          ? "1px solid rgba(27,144,232,0.1)"
           : "1px solid transparent",
         transition: "all 0.4s",
       }}
@@ -219,7 +198,7 @@ function Hero() {
           width: 750,
           height: 750,
           background:
-            "radial-gradient(circle, rgba(108,63,197,0.22) 0%, transparent 70%)",
+            "radial-gradient(circle, rgba(27,144,232,0.22) 0%, transparent 70%)",
           pointerEvents: "none",
           animation: "pulse 8s ease-in-out infinite",
         }}
@@ -232,7 +211,7 @@ function Hero() {
           width: 500,
           height: 500,
           background:
-            "radial-gradient(circle, rgba(12,204,170,0.14) 0%, transparent 70%)",
+            "radial-gradient(circle, rgba(255,179,0,0.14) 0%, transparent 70%)",
           pointerEvents: "none",
           animation: "pulse 8s ease-in-out infinite 4s",
         }}
@@ -244,12 +223,12 @@ function Hero() {
             display: "inline-flex",
             alignItems: "center",
             gap: 8,
-            background: "rgba(108,63,197,0.1)",
-            border: "1px solid rgba(108,63,197,0.22)",
+            background: "rgba(27,144,232,0.1)",
+            border: "1px solid rgba(27,144,232,0.22)",
             padding: "8px 20px",
             borderRadius: 50,
             fontSize: 12,
-            color: C.tealLight,
+            color: C.yellowLight,
             fontWeight: 500,
             marginBottom: 28,
           }}
@@ -259,7 +238,7 @@ function Hero() {
               width: 7,
               height: 7,
               borderRadius: "50%",
-              background: C.teal,
+              background: C.blue,
               display: "inline-block",
               animation: "blink 2s ease-in-out infinite",
             }}
@@ -285,7 +264,7 @@ function Hero() {
           <br />
           <span
             style={{
-              background: `linear-gradient(135deg, ${C.purple}, ${C.tealLight})`,
+              background: `linear-gradient(135deg, ${C.blue}, ${C.yellow})`,
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
             }}
@@ -319,7 +298,7 @@ function Hero() {
               ...s.btnPrimary,
               padding: "15px 34px",
               fontSize: 15,
-              boxShadow: "0 8px 32px rgba(108,63,197,0.3)",
+              boxShadow: "0 8px 32px rgba(27,144,232,0.3)",
             }}
           >
             Join the Waitlist
@@ -329,7 +308,7 @@ function Hero() {
             style={{
               background: "transparent",
               color: C.text,
-              border: "1px solid rgba(108,63,197,0.3)",
+              border: "1px solid rgba(27,144,232,0.3)",
               padding: "15px 34px",
               borderRadius: 50,
               fontSize: 15,
@@ -355,7 +334,7 @@ function Hero() {
                   fontFamily: "var(--font-heading)",
                   fontSize: 30,
                   fontWeight: 700,
-                  color: C.tealLight,
+                  color: C.yellow,
                 }}
               >
                 {n}
@@ -418,7 +397,7 @@ function HowItWorks() {
           gridTemplateColumns: "repeat(4, 1fr)",
           gap: 2,
           marginTop: 52,
-          background: "rgba(108,63,197,0.07)",
+          background: "rgba(27,144,232,0.07)",
           borderRadius: 16,
           overflow: "hidden",
         }}
@@ -437,7 +416,7 @@ function HowItWorks() {
                   fontFamily: "var(--font-heading)",
                   fontSize: 54,
                   fontWeight: 700,
-                  color: "rgba(108,63,197,0.1)",
+                  color: "rgba(27,144,232,0.1)",
                   lineHeight: 1,
                   marginBottom: 18,
                 }}
@@ -518,13 +497,6 @@ const features = [
     span: 1,
   },
   {
-    icon: "🔍",
-    t: "Search & Discovery",
-    d: "Full-text search across posts, profs, courses. Hot/New/Top feeds. Trending tags per campus.",
-    tags: [],
-    span: 1,
-  },
-  {
     icon: "🛡️",
     t: "AI Moderation",
     d: "Perspective API pre-screens every post. Auto-flag, auto-reject high toxicity. Strike system. Zero tolerance for doxxing.",
@@ -559,9 +531,9 @@ function Features() {
               style={{
                 background:
                   f.span === 2
-                    ? `linear-gradient(135deg, rgba(45,27,105,0.4), rgba(12,204,170,0.05))`
+                    ? `linear-gradient(135deg, rgba(8,20,40,0.4), rgba(255,179,0,0.05))`
                     : C.card,
-                border: `1px solid rgba(108,63,197,${f.span === 2 ? 0.2 : 0.07})`,
+                border: `1px solid rgba(27,144,232,${f.span === 2 ? 0.2 : 0.07})`,
                 borderRadius: 14,
                 padding: "32px 24px",
                 height: "100%",
@@ -577,7 +549,7 @@ function Features() {
                   justifyContent: "center",
                   fontSize: 20,
                   marginBottom: 16,
-                  background: "rgba(108,63,197,0.1)",
+                  background: "rgba(27,144,232,0.1)",
                 }}
               >
                 {f.icon}
@@ -619,8 +591,8 @@ function Features() {
                         fontWeight: 600,
                         padding: "3px 10px",
                         borderRadius: 50,
-                        background: "rgba(12,204,170,0.08)",
-                        color: C.teal,
+                        background: "rgba(255,179,0,0.08)",
+                        color: C.yellow,
                       }}
                     >
                       {t}
@@ -685,7 +657,7 @@ function WhySection() {
           gridTemplateColumns: "repeat(2, 1fr)",
           gap: 2,
           marginTop: 52,
-          background: "rgba(108,63,197,0.05)",
+          background: "rgba(27,144,232,0.05)",
           borderRadius: 16,
           overflow: "hidden",
         }}
@@ -708,7 +680,7 @@ function WhySection() {
                   width: 38,
                   height: 38,
                   borderRadius: 9,
-                  background: "rgba(108,63,197,0.1)",
+                  background: "rgba(27,144,232,0.1)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -752,7 +724,6 @@ const comp = [
   ["Blind", "Employees only, no campus features", "❌"],
   ["Reddit", "Not verified, not scoped, noisy", "❌"],
   ["WhatsApp", "No anonymity, no persistence, no structure", "❌"],
-  ["College Dunia", "Review sites, not communities", "❌"],
   [
     "UniBlind",
     "Verified + Anonymous + Scoped + Structured + Cross-campus",
@@ -772,7 +743,7 @@ function Competitive() {
           marginTop: 52,
           borderRadius: 16,
           overflow: "hidden",
-          border: "1px solid rgba(108,63,197,0.08)",
+          border: "1px solid rgba(27,144,232,0.08)",
         }}
       >
         {comp.map(([name, desc, st], i) => (
@@ -785,10 +756,10 @@ function Competitive() {
                 padding: "20px 28px",
                 background:
                   name === "UniBlind"
-                    ? `linear-gradient(135deg, rgba(45,27,105,0.45), rgba(12,204,170,0.08))`
+                    ? `linear-gradient(135deg, rgba(8,20,40,0.45), rgba(255,179,0,0.08))`
                     : C.card,
                 borderBottom:
-                  i < 4 ? "1px solid rgba(108,63,197,0.06)" : "none",
+                  i < 4 ? "1px solid rgba(27,144,232,0.06)" : "none",
               }}
             >
               <div>
@@ -796,7 +767,7 @@ function Competitive() {
                   style={{
                     fontSize: 15,
                     fontWeight: 700,
-                    color: name === "UniBlind" ? C.tealLight : C.white,
+                    color: name === "UniBlind" ? C.yellow : C.white,
                   }}
                 >
                   {name}
@@ -821,7 +792,7 @@ const posts = [
   {
     alias: "Falcon_8271",
     time: "2m",
-    text: "Is anyone else struggling with Prof. Sharma's grading? Got 15/50 on the mid-sem and I studied for 3 weeks straight.",
+    text: "Is anyone else struggling with Prof. Mitchell's grading? Got 15/50 on the mid-sem and I studied for 3 weeks straight.",
     up: 47,
     cmt: 23,
   },
@@ -848,7 +819,6 @@ function Preview() {
       style={{ ...s.section, textAlign: "center" }}
     >
       <FadeIn>
-        <div style={s.label}>App Preview</div>
         <h2 style={{ ...s.h2, margin: "0 auto" }}>See it in action.</h2>
       </FadeIn>
       <FadeIn delay={0.2}>
@@ -859,9 +829,9 @@ function Preview() {
             marginTop: 52,
             background: C.card,
             borderRadius: 32,
-            border: "2px solid rgba(108,63,197,0.13)",
+            border: "2px solid rgba(27,144,232,0.13)",
             overflow: "hidden",
-            boxShadow: "0 40px 100px rgba(108,63,197,0.18)",
+            boxShadow: "0 40px 100px rgba(27,144,232,0.18)",
           }}
         >
           <div
@@ -880,7 +850,7 @@ function Preview() {
                 justifyContent: "space-between",
                 alignItems: "center",
                 paddingBottom: 12,
-                borderBottom: "1px solid rgba(108,63,197,0.07)",
+                borderBottom: "1px solid rgba(27,144,232,0.07)",
                 marginBottom: 12,
               }}
             >
@@ -891,7 +861,7 @@ function Preview() {
                   color: C.white,
                 }}
               >
-                🏫 IIT Bombay
+                🏫 MIT Cambridge
               </span>
               <span style={{ fontSize: 16 }}>✏️</span>
             </div>
@@ -907,8 +877,8 @@ function Preview() {
                     borderRadius: 50,
                     background:
                       i === 0
-                        ? `linear-gradient(135deg, ${C.purple}, ${C.tealDim})`
-                        : "rgba(108,63,197,0.08)",
+                        ? `linear-gradient(135deg, ${C.blueDark}, ${C.blue})`
+                        : "rgba(27,144,232,0.08)",
                     color: i === 0 ? "#fff" : C.dim,
                     fontWeight: 600,
                   }}
@@ -921,8 +891,8 @@ function Preview() {
               <div
                 key={p.alias}
                 style={{
-                  background: "rgba(108,63,197,0.04)",
-                  border: "1px solid rgba(108,63,197,0.06)",
+                  background: "rgba(27,144,232,0.04)",
+                  border: "1px solid rgba(27,144,232,0.06)",
                   borderRadius: 10,
                   padding: 12,
                   marginBottom: 8,
@@ -939,7 +909,7 @@ function Preview() {
                     style={{
                       fontSize: 11,
                       fontWeight: 700,
-                      color: C.teal,
+                      color: C.blue,
                     }}
                   >
                     {p.alias}
@@ -967,7 +937,7 @@ function Preview() {
                     color: C.dim,
                   }}
                 >
-                  <span style={{ color: C.teal, fontWeight: 600 }}>
+                  <span style={{ color: C.yellow, fontWeight: 600 }}>
                     ▲ {p.up}
                   </span>
                   <span>💬 {p.cmt}</span>
@@ -986,6 +956,33 @@ function Preview() {
 function CTA() {
   const [email, setEmail] = useState("");
   const [done, setDone] = useState(false);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  async function handleSubmit() {
+    if (!email) return;
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+    setLoading(true);
+    setError("");
+    const { error: err } = await supabase
+      .from("waitlist")
+      .insert([{ email }]);
+    setLoading(false);
+    if (err) {
+      console.error("Supabase error:", err);
+      if (err.code === "23505") {
+        setError("You're already on the waitlist!");
+      } else {
+        setError(err.message || "Something went wrong. Please try again.");
+      }
+    } else {
+      setDone(true);
+    }
+  }
+
   return (
     <section id="cta" style={{ ...s.section, textAlign: "center" }}>
       <FadeIn>
@@ -993,8 +990,8 @@ function CTA() {
           style={{
             maxWidth: 650,
             margin: "0 auto",
-            background: `linear-gradient(135deg, rgba(45,27,105,0.3), rgba(12,204,170,0.05))`,
-            border: "1px solid rgba(108,63,197,0.18)",
+            background: `linear-gradient(135deg, rgba(8,20,40,0.3), rgba(255,179,0,0.05))`,
+            border: "1px solid rgba(27,144,232,0.18)",
             borderRadius: 20,
             padding: "64px 40px",
             position: "relative",
@@ -1032,7 +1029,7 @@ function CTA() {
             <p
               style={{
                 fontSize: 16,
-                color: C.tealLight,
+                color: C.yellowLight,
                 fontWeight: 600,
                 position: "relative",
                 zIndex: 2,
@@ -1043,37 +1040,44 @@ function CTA() {
           ) : (
             <div
               style={{
-                display: "flex",
-                gap: 10,
                 maxWidth: 420,
                 margin: "0 auto",
                 position: "relative",
                 zIndex: 2,
               }}
             >
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="you@university.edu"
-                style={{
-                  flex: 1,
-                  padding: "13px 18px",
-                  borderRadius: 50,
-                  border: "1px solid rgba(108,63,197,0.2)",
-                  background: "rgba(8,8,15,0.5)",
-                  color: C.text,
-                  fontSize: 13,
-                  outline: "none",
-                  fontFamily: "inherit",
-                }}
-              />
-              <button
-                onClick={() => email && setDone(true)}
-                style={{ ...s.btnPrimary, whiteSpace: "nowrap" }}
-              >
-                Join Waitlist
-              </button>
+              <div style={{ display: "flex", gap: 10 }}>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
+                  placeholder="you@university.edu"
+                  style={{
+                    flex: 1,
+                    padding: "13px 18px",
+                    borderRadius: 50,
+                    border: "1px solid rgba(27,144,232,0.2)",
+                    background: "rgba(8,13,20,0.5)",
+                    color: C.text,
+                    fontSize: 13,
+                    outline: "none",
+                    fontFamily: "inherit",
+                  }}
+                />
+                <button
+                  onClick={handleSubmit}
+                  disabled={loading}
+                  style={{ ...s.btnPrimary, whiteSpace: "nowrap", opacity: loading ? 0.7 : 1 }}
+                >
+                  {loading ? "Joining…" : "Join Waitlist"}
+                </button>
+              </div>
+              {error && (
+                <p style={{ fontSize: 13, color: "#FF6B6B", marginTop: 10, marginBottom: 0 }}>
+                  {error}
+                </p>
+              )}
             </div>
           )}
         </div>
@@ -1089,7 +1093,7 @@ function Footer() {
       style={{
         textAlign: "center",
         padding: 36,
-        borderTop: "1px solid rgba(108,63,197,0.06)",
+        borderTop: "1px solid rgba(27,144,232,0.06)",
       }}
     >
       <div
@@ -1113,7 +1117,7 @@ function Footer() {
       <p
         style={{
           fontSize: 11,
-          color: "rgba(155,151,176,0.4)",
+          color: "rgba(138,154,181,0.4)",
           marginTop: 8,
         }}
       >
@@ -1158,7 +1162,7 @@ function GlobalCSS() {
         color: #fff;
       }
       a:hover {
-        color: ${C.teal} !important;
+        color: ${C.yellow} !important;
       }
       @media (max-width: 900px) {
         nav > div:nth-child(2) a:not([style*="gradient"]) {

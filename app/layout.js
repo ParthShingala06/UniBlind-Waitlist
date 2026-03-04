@@ -37,8 +37,8 @@ export default function RootLayout({ children }) {
         style={{
           margin: 0,
           padding: 0,
-          background: "#08080F",
-          color: "#E8E6F0",
+          background: "#080D14",
+          color: "#E8EEF5",
           fontFamily: "var(--font-body), system-ui, sans-serif",
           WebkitFontSmoothing: "antialiased",
           overflowX: "hidden",
